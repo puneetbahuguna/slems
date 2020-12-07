@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 public class AddEmployeeService {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
     @Autowired
-    LoginRepository loginRepository;
+    private LoginRepository loginRepository;
 
     public boolean addEmployee(Login_Master loginData, Employees empData){
         try {
@@ -22,7 +22,7 @@ public class AddEmployeeService {
             loginRepository.save(loginData);
             return true;
         }catch (Exception e){
+            return false;
         }
-        return false;
     }
 }

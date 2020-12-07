@@ -1,5 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <html>
 <head>
   <title>Welcome to EMS</title>
@@ -68,7 +69,12 @@ button {
   </style>
 </head>
 <body>
-
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -92,7 +98,7 @@ button {
 	  <form action="/adddeptform" method="post">
       <div class="row gap">
 
-      <input type="text" placeholder="Enter Department Name" name="deptname" required>
+      <input type="text" oninvalid="alert('Please Enter Department Name');" placeholder="Enter Department Name*" name="deptname" required>
 	  </div>
 	   <div class="row">
 	    <button type="submit">Submit</button>

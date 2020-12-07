@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
     @Autowired
-    LoginRepository loginRepository;
+    private LoginRepository loginRepository;
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     public LoginUser getLoggedInUser(Login_Master userData){
         LoginUser userObj;

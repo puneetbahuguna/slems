@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class DepartmentService {
     @Autowired
-    DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
 
     public List<Department> getDepartmentList(){
         return departmentRepository.findAll();
@@ -20,7 +20,9 @@ public class DepartmentService {
         try {
             departmentRepository.save(addDept);
             return true;
-        }catch (Exception e){}
-        return false;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 }

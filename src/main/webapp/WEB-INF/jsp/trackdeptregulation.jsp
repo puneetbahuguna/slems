@@ -80,7 +80,12 @@ table {
   </style>
 </head>
 <body>
-
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -107,6 +112,7 @@ table {
                   <th>Creation Date</th>
                   <th>Department Name</th>
                   <th>Status</th>
+                  <th>Select Action</th>
                   </tr>
              <c:forEach items="${reglist}" var="regulation">
              <tr>
@@ -115,6 +121,7 @@ table {
              <th>${regulation.CREATEDDATE}</th>
              <th>${regulation.DEPARTMENT_ID}</th>
              <th>${regulation.STATUS}</th>
+             <th>&nbsp;&nbsp;<a href="adduserregulation?regulationId=${regulation.COMPLIANCEID}">View</a></th>
              </tr>
              </c:forEach>
             	</table>

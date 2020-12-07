@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 
 /**
- @Author: Puneet Kumar Bahuguna
- @Year: DEC 2020
- @Project: SimplyLearn EMS
- @Description: This controller class handles the functionality of adding a department by admin.
+ Author: Puneet Kumar Bahuguna
+ Year: DEC 2020
+ Project: SimplyLearn EMS
+ Description: This controller class handles the functionality of adding a department by admin.
  **/
 @Controller
 public class AddEmployeeController {

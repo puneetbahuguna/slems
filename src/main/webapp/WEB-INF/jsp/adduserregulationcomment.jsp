@@ -80,7 +80,12 @@ table {
   </style>
 </head>
 <body>
-
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -104,12 +109,14 @@ table {
             <div class="row">
             <table>
             <tr>
-            <th>Type</th>
+            <th>ID</th>
+            <th>RL Type</th>
             <th>Details</th>
             <th>Creation Date</th>
             <th>Department</th>
             </tr>
             <tr>
+            <th>${regulation.COMPLIANCEID}</th>
             <th>${regulation.RLTYPE}</th>
             <th>${regulation.DETAILS}</th>
             <th>${regulation.CREATEDDATE}</th>
@@ -125,13 +132,21 @@ table {
             <form action="/updateusercomment" method="post">
             <input type="hidden" name="complianceId" value="${regulation.COMPLIANCEID}">
             <input type="hidden" name="actionFlag" value="${commentMsg}">
-            <div class="row gap">
-             <input type="text" placeholder="Update Your Comments" name="usercomment" required>
-             </div>
-             <div class="row">
-             	    <button type="submit">Submit</button>
-             	   </div>
-
+             <c:choose>
+                            <c:when test="${regulation.STATUS=='Closed'}">
+                            <div class="row gap">
+                            <span style="color: blue;margin-top:15px;"><b>This Regulation is closed now</b></span>
+                            </div>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="row gap">
+                                         <input type="text" oninvalid="alert('Please Enter Your Comment');" placeholder="Update Your Comments*" name="usercomment" maxlength="15" required>
+                                         </div>
+                                         <div class="row">
+                                         	    <button type="submit">Submit</button>
+                                         	   </div>
+                            </c:otherwise>
+                            </c:choose>
              	   </form>
     </div>
     <div class="col-sm-2 sidenav">

@@ -1,5 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <html>
 <head>
 <h1>${message}</h1>
@@ -60,6 +61,15 @@ span.psw {
 </style>
 </head>
 <body>
+
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+%>
+
+
 <div id="id01" class="">
 <h3>Login to continue</h3>
   <form class="modal-content animate" action="/login" method="post">

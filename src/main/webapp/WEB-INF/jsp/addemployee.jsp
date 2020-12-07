@@ -81,7 +81,12 @@ button {
   </style>
 </head>
 <body>
-
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -108,17 +113,17 @@ button {
        name="firstname" required>
       </div>
       <div class="row">
-      <input type="text" placeholder="Enter Last Name*" name="lastname" required>
+      <input type="text" placeholder="Enter Last Name*" name="lastname" required oninvalid="alert('Please Enter Last Name');">
       </div>
       <div class="row">
-      <input type="text" onfocus="(this.type='date')" onchange="checkAgeValidation()" id="dob" placeholder="Enter DOB*" name="dob" required>
+      <input type="text" onfocus="(this.type='date')" oninvalid="alert('Please Enter DOB');" onchange="checkAgeValidation()" id="dob" placeholder="Enter DOB*" name="dob" required>
       </div>
       <div class="row">
             <input type="email" placeholder="Enter EMAIL" name="email">
             </div>
       <div class="row">
-      <select name="deptid" required>
-      <option value="" disabled selected>Select Department</option>
+      <select name="deptid" required oninvalid="alert('Please Select Department');">
+      <option value="" disabled selected>Select Department*</option>
      <c:forEach items="${deptlist}" var="dept">
                            <option value="${dept.DEPARTMENT_ID}">
                                ${dept.DEPARTMENT_NM}
@@ -127,7 +132,7 @@ button {
       </select>
       </div>
       <div class="row">
-       <input type="password" placeholder="Set Password" name="setpassword" required>
+       <input type="password" placeholder="Set Password" name="setpassword" required oninvalid="alert('Please Set Password');">
       </div>
 	   <div class="row">
 	    <button type="submit">Submit</button>

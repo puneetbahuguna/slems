@@ -1,5 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <html>
 <head>
   <title>Welcome to EMS</title>
@@ -16,7 +17,7 @@
     }
 	.well {
     min-height: 20px;
-    padding: 19px;
+    padding: 60px;
     margin-bottom: 20px;
     background-color: #d9edf7;
     border: 1px solid #e3e3e3;
@@ -51,7 +52,12 @@
   </style>
 </head>
 <body>
-
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -73,12 +79,12 @@
     <div class="col-sm-8 text-center">
       <h2>Welcome to Employee Dashboard</h2>
       <div class="row gap">
-     <div class="col-sm-4">
+     <div class="col-sm-6">
     <div class="well">
         <p><a href="viewuserregulation">View Assigned Regulations</a></p>
       </div>
       </div>
-       <div class="col-sm-4">
+       <div class="col-sm-6">
        <div class="well">
         <p><a href="trackdeptregulations">Track Department Compliance</a></p>
         </div>

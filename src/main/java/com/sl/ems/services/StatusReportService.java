@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Service
 public class StatusReportService {
@@ -22,6 +23,10 @@ public class StatusReportService {
        return UtilConstants.NO_COMMENT_MSG;
     }
 
+    public List<StatusReport> getAllUserComments(BigInteger complianceId){
+        return statusReportRepo.getAllUserComments(complianceId);
+    }
+
     public boolean addOrUpdateUserComment(StatusReport statusReport,boolean actionFlag){
         try {
             if (actionFlag) {
@@ -32,6 +37,8 @@ public class StatusReportService {
                         statusReport.getEMPID());
                 return true;
             }
-        }catch (Exception e){return false;}
+        }catch (Exception e){
+            return false;
+        }
     }
 }

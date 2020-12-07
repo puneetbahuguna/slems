@@ -38,9 +38,9 @@ public class CreateRegulationController {
     }
     @RequestMapping(value = "createregulation",method = RequestMethod.POST)
     public String addRegulation(@RequestParam("rltype") String rltype, @RequestParam("rldetails") String rldetails,
-                              @RequestParam("deptid") String deptid,Model model){
+                              @RequestParam("deptid") String deptid,@RequestParam("cdate") String cdate,Model model){
         if(sessionComponent.isAdminSession() && addRegulationService.addRegulation(new Compliance
-                (rltype,rldetails, Utils.getCurrentDate(),new BigInteger(deptid), UtilConstants.DEFAULT_REGULATION_STATUS))){
+                (rltype,rldetails, Utils.getFormattedDate(cdate),new BigInteger(deptid), UtilConstants.DEFAULT_REGULATION_STATUS))){
             model.addAttribute("msg","Regulation is added Successfully!");
         } else model.addAttribute("msg","Some Error Occurred!");
         return addRegulationPage(model);

@@ -49,7 +49,7 @@
       }
       .row.content {height:100%;}
     }
-	input[type=text],input[type=date],select {
+	select {
   width: 30%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -66,6 +66,17 @@ button {
   cursor: pointer;
   width: 30%;
 }
+table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      font-size:12px;
+      padding: 8px;
+    }
   </style>
 </head>
 <body>
@@ -94,32 +105,56 @@ response.setDateHeader ("Expires", 0);
 
     </div>
     <div class="col-sm-8 text-center">
-      <h2>Create Regulation</h2>
-	  <form action="/createregulation" method="post">
-      <div class="row gap">
-      <input type="text" oninvalid="alert('Please Enter Regulation Type');" placeholder="Enter Regulation Type*" name="rltype" maxlength="15"  required>
-	  </div>
-	  <div class = "row">
-	  <input type="text" oninvalid="alert('Please Enter Regulation Details');" placeholder="Enter Regulation Details*" name="rldetails" maxlength="250" required>
-	  </div>
-      <div class="row">
-      <input type="text" onfocus="(this.type='date')" oninvalid="alert('Please Select Creation Date');" id="dob" placeholder="Select Creation Date*" name="cdate" required>
-      </div>
-	  <div class="row">
-            <select name="deptid" required oninvalid="alert('Please Select Department Name');">
-            <option value="" disabled selected>Select Department*</option>
-           <c:forEach items="${deptlist}" var="dept">
-                                 <option value="${dept.DEPARTMENT_ID}">
-                                     ${dept.DEPARTMENT_NM}
-                                 </option>
-                             </c:forEach>
-            </select>
+      <h2>Regulations Details</h2>
+            <div class="row">
+            <table>
+            <tr>
+            <th>ID</th>
+            <th>RL Type</th>
+            <th>Details</th>
+            <th>Creation Date</th>
+            <th>Department</th>
+            </tr>
+            <tr>
+            <th>${regulation.COMPLIANCEID}</th>
+            <th>${regulation.RLTYPE}</th>
+            <th>${regulation.DETAILS}</th>
+            <th>${regulation.CREATEDDATE}</th>
+            <th>${regulation.DEPARTMENT_ID}</th>
+            </tr>
+            </table>
             </div>
-	   <div class="row">
-	    <button type="submit">Submit</button>
-	   </div>
-	   <span style="color: blue;margin-top:15px;"><b>${msg}</b></span>
-	   </form>
+            <div class="row">
+            <table><tr>
+            <th>All User Comments</th></tr>
+            <c:forEach items="${commentMsgs}" var="comment">
+            <tr><th>${comment.COMMENTS}  - By ${comment.EMPID} at ${comment.CREATEDDATE}</th></tr>
+                                   </c:forEach>
+            </table>
+            </div>
+
+            <form action="/updateregstatus" method="post">
+            <input type="hidden" name="complianceId" value="${regulation.COMPLIANCEID}">
+
+            <c:choose>
+                <c:when test="${successmsg=='This Regulation is closed'}">
+                </c:when>
+                <c:otherwise>
+                <div class="row gap">
+                   <select name="regstatus" required>
+                              <option value="" disabled selected>Change Regulation Status</option>
+                              <option value="Closed" name="">Mark As Closed</option>
+                              </select>
+                               </div>
+                                <div class="row">
+                                 <button type="submit">Submit</button>
+                                  </div>
+                </c:otherwise>
+            </c:choose>
+            <div class="row gap">
+             	   <span style="color: blue;margin-top:15px;"><b>${successmsg}</b></span>
+             	   </div>
+             	   </form>
     </div>
     <div class="col-sm-2 sidenav">
     <p><b>Hi ${fullname}</b></p>

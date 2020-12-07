@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
-@Author: Puneet Kumar Bahuguna
-@Year: DEC 2020
-@Project: SimplyLearn EMS
-@Description: This controller class handles the functionality of adding a department by admin.
+Author: Puneet Kumar Bahuguna
+Year: DEC 2020
+Project: SimplyLearn EMS
+Description: This controller class handles the functionality of adding a department by admin.
  **/
 
 @Controller

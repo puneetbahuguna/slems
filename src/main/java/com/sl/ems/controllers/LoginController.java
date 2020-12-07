@@ -6,8 +6,6 @@ import com.sl.ems.services.LoginService;
 import com.sl.ems.utils.UtilConstants;
 import com.sl.ems.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +32,11 @@ public class LoginController {
         session.removeAttribute("name");
         session.removeAttribute("role");
         session.invalidate();
+        model.addAttribute("message","Welcome to EMS");
+        return "login";
+    }
+    @RequestMapping("login")
+    public String login(Model model){
         model.addAttribute("message","Welcome to EMS");
         return "login";
     }
