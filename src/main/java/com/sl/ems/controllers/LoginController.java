@@ -3,6 +3,7 @@ package com.sl.ems.controllers;
 import com.sl.ems.models.LoginUser;
 import com.sl.ems.models.Login_Master;
 import com.sl.ems.services.LoginService;
+import com.sl.ems.utils.SessionComponent;
 import com.sl.ems.utils.UtilConstants;
 import com.sl.ems.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,19 @@ public class LoginController {
 
    @Autowired
    private LoginService loginService;
+   @Autowired
+   private SessionComponent sessionComponent;
 
-    @RequestMapping("/")
-    public String getLoginPage(Model model){
-        model.addAttribute("message","Welcome to EMS");
-        return "login";
+    @RequestMapping({"/","login"})
+    public String getLoginPage(HttpSession session,Model model){
+        if(sessionComponent.isAdminSession() || sessionComponent.isEmpSession()){
+            String role = session.getAttribute("role").toString();
+            return "redirect:"+role;
+        }else{
+            model.addAttribute("message","Welcome to EMS");
+            return "login";
+        }
+
     }
     @RequestMapping("relogin")
     public String reLogin(HttpSession session,Model model){
@@ -33,12 +42,7 @@ public class LoginController {
         session.removeAttribute("role");
         session.invalidate();
         model.addAttribute("message","Welcome to EMS");
-        return "login";
-    }
-    @RequestMapping("login")
-    public String login(Model model){
-        model.addAttribute("message","Welcome to EMS");
-        return "login";
+        return "redirect:"+getLoginPage(session,model);
     }
     @RequestMapping("logintry")
     public String loginError(Model model){

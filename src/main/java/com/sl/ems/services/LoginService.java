@@ -8,6 +8,8 @@ import com.sl.ems.repositories.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+
 @Service
 public class LoginService {
 
@@ -30,4 +32,16 @@ public class LoginService {
         }
         return userObj;
     }
+
+    public String findEmpPWDById(BigInteger userId){
+        return loginRepository.findEmpPWDById(userId);
+    }
+
+      void editLoginMaster(Login_Master login_master){
+          loginRepository.editLoginMaster(login_master.getPassword(),login_master.getUSERID());
+      }
+      void deleteUser(BigInteger userId){
+        loginRepository.deleteUser(userId);
+      }
+
 }

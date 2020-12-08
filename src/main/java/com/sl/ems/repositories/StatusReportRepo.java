@@ -14,8 +14,8 @@ public interface StatusReportRepo extends JpaRepository<StatusReport, BigInteger
     @Query(value = "select * from statusreport WHERE COMPLIANCEID=?1 AND EMPID=?2",nativeQuery = true)
     StatusReport getUserCommentonCompliance(BigInteger complianceId,BigInteger empId);
 
-    @Query(value = "select * from statusreport WHERE COMPLIANCEID=?1",nativeQuery = true)
-    List<StatusReport> getAllUserComments(BigInteger complianceId);
+    /*@Query(value = "select * from statusreport WHERE COMPLIANCEID=?1",nativeQuery = true)
+    List<StatusReport> getAllUserComments(BigInteger complianceId);*/
 
     @Transactional
     @Modifying

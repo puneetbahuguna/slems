@@ -26,7 +26,7 @@ public class UpdateUserRegulation {
     @Autowired
     private StatusReportService statusReportService;
     @Autowired
-    CloseRegulationService closeRegulationService;
+    private CloseRegulationService closeRegulationService;
 
     @RequestMapping("adduserregulation")
     public String addUserRegulation(Model model,@RequestParam("regulationId") String complianceId){

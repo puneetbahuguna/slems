@@ -1,33 +1,20 @@
 package com.sl.ems.models;
 
-import com.sl.ems.utils.Utils;
-
-import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
-@Entity
-public class Employees {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmpDeptJoin {
     private BigInteger EMPID;
     private String FIRSTNAME;
     private String LASTNAME;
     private Date DOB;
     private String EMAIL;
     private BigInteger DEPARTMENT_ID;
+    private String DEPARTMENT_NM;
 
-    public Employees(){
-    }
-    public Employees(String FIRSTNAME,String LASTNAME,Date DOB,String EMAIL,BigInteger DEPARTMENT_ID){
-        this.FIRSTNAME=FIRSTNAME;
-        this.LASTNAME=LASTNAME;
-        this.DOB=DOB;
-        this.EMAIL=EMAIL;
-        this.DEPARTMENT_ID=DEPARTMENT_ID;
-    }
+    public EmpDeptJoin(){
 
+    }
     public BigInteger getEMPID() {
         return EMPID;
     }
@@ -74,5 +61,13 @@ public class Employees {
 
     public void setDEPARTMENT_ID(BigInteger DEPARTMENT_ID) {
         this.DEPARTMENT_ID = DEPARTMENT_ID;
+    }
+
+    public String getDEPARTMENT_NM() {
+        return DEPARTMENT_NM;
+    }
+
+    public void setDEPARTMENT_NM(String DEPARTMENT_NM) {
+        this.DEPARTMENT_NM = DEPARTMENT_NM;
     }
 }

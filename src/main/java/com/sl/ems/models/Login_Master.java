@@ -15,6 +15,10 @@ public class Login_Master {
     public Login_Master(){
 
     }
+    public Login_Master(BigInteger USERID,String PASSWORD){
+        this.USERID=USERID;
+        this.PASSWORD=PASSWORD;
+    }
     public BigInteger getUSERID() {
         return USERID;
     }

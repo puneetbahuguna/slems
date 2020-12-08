@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
@@ -116,15 +117,15 @@ response.setDateHeader ("Expires", 0);
                   <th>Status</th>
                   <th>Select Action</th>
                   </tr>
-             <c:forEach items="${reglist}" var="regulation">
+             <c:forEach items="${reglist}" var="regulation" varStatus="loop">
              <tr>
-             <th>${regulation.COMPLIANCEID}</th>
-             <th>${regulation.RLTYPE}</th>
-             <th>${regulation.DETAILS}</th>
-             <th>${regulation.CREATEDDATE}</th>
-             <th>${regulation.DEPARTMENT_ID}</th>
-             <th>${regulation.STATUS}</th>
-             <th>&nbsp;&nbsp;<a href="adminregulationdetails?regulationId=${regulation.COMPLIANCEID}">View</a></th>
+             <th>${regulation[0]}</th>
+             <th>${regulation[1]}</th>
+             <th>${regulation[2]}</th>
+             <th>${fn:split(regulation[3], ' ')[0]}</th>
+             <th>${regulation[6]}</th>
+             <th>${regulation[4]}</th>
+             <th>&nbsp;&nbsp;<a href="adminregulationdetails?regulationId=${regulation[0]}&deptName=${regulation[6]}">View</a></th>
              </tr>
              </c:forEach>
             	</table>

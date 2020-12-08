@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
@@ -98,14 +99,16 @@ response.setDateHeader ("Expires", 0);
             <th>Department</th>
             <th>Select Action</th>
             </tr>
-       <c:forEach items="${emplist}" var="emp">
+       <c:forEach items="${emplist}" var="emp" varStatus="loop">
        <tr>
-       <th>${emp.EMPID}</th>
-       <th>${emp.FIRSTNAME} ${emp.LASTNAME}</th>
-       <th>${emp.DOB}</th>
-       <th>${emp.EMAIL}</th>
-       <th></th>
-       <th><a href="${emp}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">Delete</a></th></th></tr>
+       <th>${emp[0]}</th>
+        <th>${emp[1]} ${emp[2]}</th>
+              <th>${fn:split(emp[3], ' ')[0]}</th>
+              <th>${emp[4]}</th>
+       <th>${emp[6]}</th>
+       <th>
+       <a href="editEmployee?empId=${emp[0]}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="deleteEmployee?empId=${emp[0]}">Delete</a>
+       </th>
        </tr>
        </c:forEach>
       	</table>

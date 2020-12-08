@@ -1,10 +1,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-  <title>Welcome to EMS</title>
+<script>
+function checkAgeValidation() {
+  var Bdate = document.getElementById("dob").value;
+  var Bday = +new Date(Bdate);
+  var age =  ~~ ((Date.now() - Bday) / (31557600000));
+  if(parseInt(age)<24){
+  document.getElementById("dob").value="";
+  alert("Minimum Employee Age should be 24");}
+
+}
+</script>
+
+  <title>Add Employee</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -50,7 +61,7 @@
       }
       .row.content {height:100%;}
     }
-	select {
+	input[type=text], input[type=password],input[type=date],input[type=email],select,option {
   width: 30%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -67,17 +78,6 @@ button {
   cursor: pointer;
   width: 30%;
 }
-table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      font-size:12px;
-      padding: 8px;
-    }
   </style>
 </head>
 <body>
@@ -106,57 +106,44 @@ response.setDateHeader ("Expires", 0);
 
     </div>
     <div class="col-sm-8 text-center">
-      <h2>Regulations Details</h2>
-            <div class="row">
-            <table>
-            <tr>
-            <th>ID</th>
-            <th>RL Type</th>
-            <th>Details</th>
-            <th>Creation Date</th>
-            <th>Department</th>
-            </tr>
-            <tr>
-            <th>${regulation.COMPLIANCEID}</th>
-            <th>${regulation.RLTYPE}</th>
-            <th>${regulation.DETAILS}</th>
-            <th>${cdate}</th>
-            <th>${deptName}</th>
-            </tr>
-            </table>
+      <h2>Edit Employee</h2>
+	  <form action="/editempform" method="post">
+	  <input type="hidden" value="${employee.EMPID}" name="empid">
+      <div class="row gap">
+      <input type="text" value="${employee.FIRSTNAME}" placeholder="Enter First Name*" oninvalid="alert('Please Enter First Name');"
+       name="firstname" required>
+      </div>
+      <div class="row">
+      <input type="text" value="${employee.LASTNAME}" placeholder="Enter Last Name*" name="lastname" required oninvalid="alert('Please Enter Last Name');">
+      </div>
+      <div class="row">
+      <input type="text" value="${dob}" onfocus="(this.type='date')" oninvalid="alert('Please Enter DOB');" onchange="checkAgeValidation()" id="dob" placeholder="Enter DOB*" name="dob" required>
+      </div>
+      <div class="row">
+            <input type="email" value="${employee.EMAIL}" placeholder="Enter EMAIL" name="email">
             </div>
-            <div class="row">
-            <table><tr>
-            <th>All User Comments</th></tr>
-            <c:forEach items="${commentMsgs}" var="comment" varStatus="loop">
-            <tr><th>${comment[0]} - By ${comment[2]} ${comment[3]} on ${fn:split(comment[1], ' ')[0]}</th></tr>
-                                   </c:forEach>
-            </table>
-            </div>
-
-            <form action="/updateregstatus" method="post">
-            <input type="hidden" name="complianceId" value="${regulation.COMPLIANCEID}">
-            <input type="hidden" name="deptName" value="${deptName}">
-
-            <c:choose>
-                <c:when test="${successmsg=='This Regulation is closed'}">
-                </c:when>
-                <c:otherwise>
-                <div class="row gap">
-                   <select name="regstatus" required>
-                              <option value="" disabled selected>Change Regulation Status</option>
-                              <option value="Closed" name="">Mark As Closed</option>
-                              </select>
-                               </div>
-                                <div class="row">
-                                 <button type="submit">Submit</button>
-                                  </div>
-                </c:otherwise>
-            </c:choose>
-            <div class="row gap">
-             	   <span style="color: blue;margin-top:15px;"><b>${successmsg}</b></span>
-             	   </div>
-             	   </form>
+      <div class="row">
+      <select name="deptid">
+     <c:forEach items="${deptlist}" var="dept">
+      <c:choose>
+                                 <c:when test="${dept.DEPARTMENT_ID==employee.DEPARTMENT_ID}">
+                                  <option value="${dept.DEPARTMENT_ID}" selected>${dept.DEPARTMENT_NM}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                 <option value="${dept.DEPARTMENT_ID}">${dept.DEPARTMENT_NM}</option>
+                                 </c:otherwise>
+                                 </c:choose>
+                       </c:forEach>
+      </select>
+      </div>
+      <div class="row">
+       <input type="password"  value ="${userpwd}" placeholder="Set Password" name="setpassword" required oninvalid="alert('Please Set Password');">
+      </div>
+	   <div class="row">
+	    <button type="submit">Submit</button>
+	   </div>
+	   <span style="color: blue;margin-top:15px;"><b>${msg}</b></span>
+	   </form>
     </div>
     <div class="col-sm-2 sidenav">
     <p><b>Hi ${fullname}</b></p>

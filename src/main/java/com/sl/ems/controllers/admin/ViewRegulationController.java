@@ -5,6 +5,7 @@ import com.sl.ems.services.RegulationService;
 import com.sl.ems.services.StatusReportService;
 import com.sl.ems.utils.SessionComponent;
 import com.sl.ems.utils.UtilConstants;
+import com.sl.ems.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,17 +30,20 @@ public class ViewRegulationController {
     public String addViewRegPage(Model model){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
-            //List<Employees> empL=employeeService.getEmployeeList();
-            model.addAttribute("reglist",regulationService.getAllRegulations());
+            //List<Compliance> list = regulationService.getAllRegulations();
+            model.addAttribute("reglist",regulationService.getRegulationsListWithDept());
             return "viewregulation";
         }else return "redirect:relogin";
     }
 
     @RequestMapping("adminregulationdetails")
-    public String addAdminRegDetails(Model model,@RequestParam("regulationId") String complianceId){
+    public String addAdminRegDetails(Model model,@RequestParam("regulationId") String complianceId,
+                                     @RequestParam("deptName") String deptName){
         if(sessionComponent.isAdminSession()){
             Compliance compliance = regulationService.getRegulationById(new BigInteger(complianceId));
             model.addAttribute("regulation",compliance);
+            model.addAttribute("deptName",deptName);
+            model.addAttribute("cdate", Utils.getFormattedDateString(compliance.getCREATEDDATE()));
             model.addAttribute("commentMsgs", statusReportService.
                     getAllUserComments(new BigInteger(complianceId)));
             if(compliance.getSTATUS().equals(UtilConstants.CLOSED_REGULATION_STATUS)) {
@@ -52,11 +56,12 @@ public class ViewRegulationController {
 
 
     @RequestMapping(value = "updateregstatus",method = RequestMethod.POST)
-    public String updateUserComment(@RequestParam("complianceId") String complianceId, Model model){
+    public String updateUserComment(@RequestParam("complianceId") String complianceId, Model model,
+                                    @RequestParam("deptName") String deptName){
         if(sessionComponent.isAdminSession() &&
                 regulationService.updateComplianceStatus(new BigInteger(complianceId))){
         }
-        return addAdminRegDetails(model,complianceId);
+        return addAdminRegDetails(model,complianceId,deptName);
     }
 
     @RequestMapping("viewuserregulation")
@@ -64,9 +69,9 @@ public class ViewRegulationController {
         if(sessionComponent.isEmpSession()){
             sessionComponent.getSessionModel(model);
             model.addAttribute("reglist",regulationService.getAllUserRegulations
-                    (new BigInteger(session.getAttribute("deptid").toString()), UtilConstants.DEFAULT_REGULATION_STATUS));
+                    (new BigInteger(session.getAttribute("deptid").toString()),
+                            UtilConstants.DEFAULT_REGULATION_STATUS));
             return "viewuserregulation";
         }else return "redirect:relogin";
     }
-
 }

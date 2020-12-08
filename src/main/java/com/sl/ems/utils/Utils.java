@@ -2,10 +2,7 @@ package com.sl.ems.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Base64;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Utils {
@@ -17,26 +14,23 @@ public class Utils {
         }
         return null;
     }
-    public static Date getDOBFormattedDate(Date inputDate){
-        Date formatDate=null;
+    public static String getFormattedDateString(Date inputDate){
         try {
-            String dateString = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(inputDate);
-            formatDate=new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
-        }catch (Exception e){}
-        return formatDate;
+            return new SimpleDateFormat("yyyy-MM-dd").format(inputDate);
+        }catch (Exception e){return null;}
     }
     public static String getBase64Encoding(String plainText){
         return Base64.getEncoder().encodeToString(plainText.getBytes());
+    }
+    public static String getBase64Decoding(String encryptedString){
+        byte[] decodesString = Base64.getDecoder().decode(encryptedString);
+        return new String(decodesString);
     }
     public static Date getCurrentDate(){
         Date currentDate = null;
         try {
             String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            //LocalDate today = LocalDate.now();
-
             currentDate = new SimpleDateFormat("yyyy-MM-dd").parse(modifiedDate);
-            /*String modifiedDate= new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            currentDate = new SimpleDateFormat("dd-MM-yyyy").parse(modifiedDate);*/
         } catch (ParseException e) {
             e.printStackTrace();
         }
