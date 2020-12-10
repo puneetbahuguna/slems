@@ -19,12 +19,20 @@ import java.math.BigInteger;
 @Controller
 public class LoginController {
 
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This controller class handles the Login functionality.
+     **/
+
    @Autowired
    private LoginService loginService;
    @Autowired
    private SessionComponent sessionComponent;
 
-    @RequestMapping({"/","login"})
+   /**Mapping of home page which redirects to the login page**/
+   @RequestMapping({"/","login"})
     public String getLoginPage(HttpSession session,Model model){
         if(sessionComponent.isAdminSession() || sessionComponent.isEmpSession()){
             String role = session.getAttribute("role").toString();
@@ -33,8 +41,9 @@ public class LoginController {
             model.addAttribute("message","Welcome to EMS");
             return "login";
         }
-
     }
+
+    /**If session expires or user logged out it redirects to the login page again and remove the user session.**/
     @RequestMapping("relogin")
     public String reLogin(HttpSession session,Model model){
         session.removeAttribute("userid");
@@ -44,6 +53,9 @@ public class LoginController {
         model.addAttribute("message","Welcome to EMS");
         return "redirect:"+getLoginPage(session,model);
     }
+
+    /**This method is called if users enters wrong login credentials, from here
+     * user again redirected to the login page with error message**/
     @RequestMapping("logintry")
     public String loginError(Model model){
         model.addAttribute("message","Welcome to EMS");
@@ -51,6 +63,8 @@ public class LoginController {
         return "login";
     }
 
+    /**This method checks for login, validate userid and password entered by the user from the database,
+     * if user is valid then it sets the session of user**/
     @RequestMapping(value = "login",method = RequestMethod.POST)
     public String checkLogin(HttpSession session, @RequestParam("userid") String userid,
                              @RequestParam("password") String password){

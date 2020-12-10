@@ -8,11 +8,18 @@ import java.math.BigInteger;
 
 @Service
 public class DeleteEmployeeService {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This service class handles delete employee functionality.
+     **/
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
     private LoginService loginService;
 
+    /**This method deletes the employee record from both employees and login_master table. **/
     public boolean deleteEmployee(BigInteger id){
         try {
             employeeRepository.deleteEmployee(id);

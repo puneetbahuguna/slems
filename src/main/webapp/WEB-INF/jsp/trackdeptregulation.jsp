@@ -110,7 +110,7 @@ response.setDateHeader ("Expires", 0);
             	<tr><th>Type</th>
                   <th>Details</th>
                   <th>Creation Date</th>
-                  <th>Department Name</th>
+                  <th>Department</th>
                   <th>Status</th>
                   <th>Select Action</th>
                   </tr>
@@ -119,7 +119,7 @@ response.setDateHeader ("Expires", 0);
              <th>${regulation.RLTYPE}</th>
              <th>${regulation.DETAILS}</th>
              <th>${regulation.CREATEDDATE}</th>
-             <th>${regulation.DEPARTMENT_ID}</th>
+             <th>${regulation.department.DEPARTMENT_NM}</th>
              <th>${regulation.STATUS}</th>
              <th>&nbsp;&nbsp;<a href="adduserregulation?regulationId=${regulation.COMPLIANCEID}">View</a></th>
              </tr>

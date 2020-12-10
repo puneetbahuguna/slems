@@ -117,15 +117,15 @@ response.setDateHeader ("Expires", 0);
                   <th>Status</th>
                   <th>Select Action</th>
                   </tr>
-             <c:forEach items="${reglist}" var="regulation" varStatus="loop">
+             <c:forEach items="${reglist}" var="regulation">
              <tr>
-             <th>${regulation[0]}</th>
-             <th>${regulation[1]}</th>
-             <th>${regulation[2]}</th>
-             <th>${fn:split(regulation[3], ' ')[0]}</th>
-             <th>${regulation[6]}</th>
-             <th>${regulation[4]}</th>
-             <th>&nbsp;&nbsp;<a href="adminregulationdetails?regulationId=${regulation[0]}&deptName=${regulation[6]}">View</a></th>
+             <th>${regulation.COMPLIANCEID}</th>
+             <th>${regulation.RLTYPE}</th>
+             <th>${regulation.DETAILS}</th>
+             <th>${fn:split(regulation.CREATEDDATE, ' ')[0]}</th>
+             <th>${regulation.department.DEPARTMENT_NM}</th>
+             <th>${regulation.STATUS}</th>
+             <th>&nbsp;&nbsp;<a href="adminregulationdetails?regulationId=${regulation.COMPLIANCEID}">View</a></th>
              </tr>
              </c:forEach>
             	</table>

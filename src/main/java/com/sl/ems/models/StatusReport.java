@@ -3,10 +3,17 @@ package com.sl.ems.models;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="statusreport")
 public class StatusReport {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This Entity class mapped to the statusreport table in the database.
+     **/
     private BigInteger COMPLIANCEID;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +22,17 @@ public class StatusReport {
     private String COMMENTS;
     private Date CREATEDDATE;
     private BigInteger DEPARTMENT_ID;
+
+   /* @OneToOne
+    @JoinTable(name = "Employees")
+    @JoinColumn(name = "EMPID")
+    private Employees employee;*/
+
+
     public StatusReport(){
+    }
+    public StatusReport(String COMMENTS,Date CREATEDDATE){
+
     }
     public StatusReport(BigInteger COMPLIANCEID,BigInteger EMPID,
                         String COMMENTS,Date CREATEDDATE,BigInteger DEPARTMENT_ID){
@@ -72,4 +89,12 @@ public class StatusReport {
     public void setDEPARTMENT_ID(BigInteger DEPARTMENT_ID) {
         this.DEPARTMENT_ID = DEPARTMENT_ID;
     }
+
+    /*public Employees getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
+    }*/
 }

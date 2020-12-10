@@ -1,6 +1,7 @@
 package com.sl.ems.controllers.admin;
 
 import com.sl.ems.models.Compliance;
+import com.sl.ems.models.StatusReport;
 import com.sl.ems.services.RegulationService;
 import com.sl.ems.services.StatusReportService;
 import com.sl.ems.utils.SessionComponent;
@@ -15,9 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
+import java.util.List;
 
 @Controller
 public class ViewRegulationController {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This controller class handles the View Regulations functionality.
+     **/
 
     @Autowired
     private RegulationService regulationService;
@@ -26,24 +34,24 @@ public class ViewRegulationController {
     @Autowired
     private StatusReportService statusReportService;
 
+    /** Following method loads the view regulation page.**/
     @RequestMapping("viewregulation")
     public String addViewRegPage(Model model){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
-            //List<Compliance> list = regulationService.getAllRegulations();
-            model.addAttribute("reglist",regulationService.getRegulationsListWithDept());
+            model.addAttribute("reglist",regulationService.getAllRegulations());
             return "viewregulation";
         }else return "redirect:relogin";
     }
 
+    /** Following method loads the admin regulation details page.**/
     @RequestMapping("adminregulationdetails")
-    public String addAdminRegDetails(Model model,@RequestParam("regulationId") String complianceId,
-                                     @RequestParam("deptName") String deptName){
+    public String addAdminRegDetails(Model model,@RequestParam("regulationId") String complianceId){
         if(sessionComponent.isAdminSession()){
             Compliance compliance = regulationService.getRegulationById(new BigInteger(complianceId));
             model.addAttribute("regulation",compliance);
-            model.addAttribute("deptName",deptName);
             model.addAttribute("cdate", Utils.getFormattedDateString(compliance.getCREATEDDATE()));
+            List<StatusReport> replist = statusReportService.getAllUserComments(new BigInteger(complianceId));
             model.addAttribute("commentMsgs", statusReportService.
                     getAllUserComments(new BigInteger(complianceId)));
             if(compliance.getSTATUS().equals(UtilConstants.CLOSED_REGULATION_STATUS)) {
@@ -54,16 +62,16 @@ public class ViewRegulationController {
         }else return "redirect:relogin";
     }
 
-
+    /** Following method updates the regulation status to closed by admin.**/
     @RequestMapping(value = "updateregstatus",method = RequestMethod.POST)
-    public String updateUserComment(@RequestParam("complianceId") String complianceId, Model model,
-                                    @RequestParam("deptName") String deptName){
+    public String updateUserComment(@RequestParam("complianceId") String complianceId, Model model){
         if(sessionComponent.isAdminSession() &&
                 regulationService.updateComplianceStatus(new BigInteger(complianceId))){
         }
-        return addAdminRegDetails(model,complianceId,deptName);
+        return addAdminRegDetails(model,complianceId);
     }
 
+    /** Following method loads the regulation assigned to the user page.**/
     @RequestMapping("viewuserregulation")
     public String addViewUserRegPage(HttpSession session, Model model){
         if(sessionComponent.isEmpSession()){

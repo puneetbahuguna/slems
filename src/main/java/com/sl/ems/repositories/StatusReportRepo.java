@@ -8,14 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.List;
-
+/**
+ Author: Puneet Kumar Bahuguna
+ Year: DEC 2020
+ Project: SimplyLearn EMS
+ Description: This Repository interface handles loading of StatusReport data from the database.
+ **/
 public interface StatusReportRepo extends JpaRepository<StatusReport, BigInteger> {
 
     @Query(value = "select * from statusreport WHERE COMPLIANCEID=?1 AND EMPID=?2",nativeQuery = true)
     StatusReport getUserCommentonCompliance(BigInteger complianceId,BigInteger empId);
 
-    /*@Query(value = "select * from statusreport WHERE COMPLIANCEID=?1",nativeQuery = true)
-    List<StatusReport> getAllUserComments(BigInteger complianceId);*/
+    @Query(value = "select * from statusreport WHERE COMPLIANCEID=?1",nativeQuery = true)
+    List<StatusReport> getAllUserComments(BigInteger complianceId);
 
     @Transactional
     @Modifying

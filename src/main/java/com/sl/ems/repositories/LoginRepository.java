@@ -8,6 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 
+/**
+ Author: Puneet Kumar Bahuguna
+ Year: DEC 2020
+ Project: SimplyLearn EMS
+ Description: This Repository interface handles loading of login_master data from the database.
+ **/
 public interface LoginRepository extends JpaRepository<Login_Master, BigInteger> {
 
     @Query(value = "select * from login_master WHERE USERID=?1 and PASSWORD=?2",nativeQuery = true)

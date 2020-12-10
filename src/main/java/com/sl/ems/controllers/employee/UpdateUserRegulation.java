@@ -19,6 +19,13 @@ import java.math.BigInteger;
 @Controller
 public class UpdateUserRegulation {
 
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This controller class handles the Update User regulations functionality.
+     **/
+
     @Autowired
     private SessionComponent sessionComponent;
     @Autowired
@@ -28,18 +35,29 @@ public class UpdateUserRegulation {
     @Autowired
     private CloseRegulationService closeRegulationService;
 
+    /** Following method loads the regulation details page along with user's own comment.**/
     @RequestMapping("adduserregulation")
     public String addUserRegulation(Model model,@RequestParam("regulationId") String complianceId){
         if(sessionComponent.isEmpSession()){
             model.addAttribute("regulation",regulationService.getRegulationById(new BigInteger(complianceId)));
-            model.addAttribute("commentMsg", statusReportService.
-                    getUserCommentonCompliance(new BigInteger(complianceId),sessionComponent.getSessionUserId()));
+            StatusReport ss = statusReportService.getUserCommentonCompliance
+                    (new BigInteger(complianceId),sessionComponent.getSessionUserId());
+            if(ss!=null){
+                model.addAttribute("commentMsg", ss.getCOMMENTS());
+                model.addAttribute("comdate"," - On "+ss.getCREATEDDATE());
+            }else {
+                model.addAttribute("commentMsg", UtilConstants.NO_COMMENT_MSG);
+            }
             sessionComponent.getSessionModel(model);
             return "adduserregulationcomment";
         }else return "redirect:relogin";
     }
 
-    /** This method saves the department into database.**/
+    /** This method updates the user comment in the database until and unless the
+     * regulation is not closed.
+     * This method also checks if the comment added/updated by the user is the last
+     * employee in the dept who is updating, if true this method also close the regulation.
+     * **/
     @RequestMapping(value = "updateusercomment",method = RequestMethod.POST)
     public String updateUserComment(@RequestParam("usercomment") String userComment,
                                  @RequestParam("actionFlag") String actionFlag,
@@ -53,6 +71,8 @@ public class UpdateUserRegulation {
         return addUserRegulation(model,complianceId);
     }
 
+    /** Following method checks if user is adding comment for the first time or
+     * updating the comment based on the action insert and update commands fires.**/
     private boolean getActionFlag(String actionString){
         return actionString.equals(UtilConstants.NO_COMMENT_MSG);
     }

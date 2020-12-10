@@ -5,6 +5,12 @@ import java.math.BigInteger;
 
 @Entity
 public class Department {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This Entity class mapped to the department table in the database.
+     **/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger DEPARTMENT_ID;

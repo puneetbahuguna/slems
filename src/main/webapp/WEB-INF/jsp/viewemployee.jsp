@@ -99,15 +99,15 @@ response.setDateHeader ("Expires", 0);
             <th>Department</th>
             <th>Select Action</th>
             </tr>
-       <c:forEach items="${emplist}" var="emp" varStatus="loop">
+       <c:forEach items="${emplist}" var="emp">
        <tr>
-       <th>${emp[0]}</th>
-        <th>${emp[1]} ${emp[2]}</th>
-              <th>${fn:split(emp[3], ' ')[0]}</th>
-              <th>${emp[4]}</th>
-       <th>${emp[6]}</th>
+       <th>${emp.EMPID}</th>
+        <th>${emp.FIRSTNAME} ${emp.LASTNAME}</th>
+              <th>${fn:split(emp.DOB, ' ')[0]}</th>
+              <th>${emp.EMAIL}</th>
+       <th>${emp.department.DEPARTMENT_NM}</th>
        <th>
-       <a href="editEmployee?empId=${emp[0]}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="deleteEmployee?empId=${emp[0]}">Delete</a>
+       <a href="editEmployee?empId=${emp.EMPID}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="deleteEmployee?empId=${emp.EMPID}">Delete</a>
        </th>
        </tr>
        </c:forEach>

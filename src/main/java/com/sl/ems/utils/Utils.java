@@ -6,6 +6,12 @@ import java.util.Base64;
 import java.util.Date;
 
 public class Utils {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This controller class maintains common methods used in the application.
+     **/
     public static Date getFormattedDate(String dateString){
         try {
             return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);

@@ -1,15 +1,17 @@
 package com.sl.ems.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
 public class Compliance {
-
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This Entity class mapped to the compliance table in the database.
+     **/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger COMPLIANCEID;
@@ -18,6 +20,12 @@ public class Compliance {
     private Date CREATEDDATE;
     private BigInteger DEPARTMENT_ID;
     private String STATUS;
+
+    @OneToOne
+    @JoinTable(name = "Department")
+    @JoinColumn(name = "DEPARTMENT_ID")
+    private Department department;
+
     public Compliance(){
     }
     public Compliance(String RLTYPE,String DETAILS,Date CREATEDDATE,BigInteger DEPARTMENT_ID,String STATUS){
@@ -73,5 +81,13 @@ public class Compliance {
 
     public void setSTATUS(String STATUS) {
         this.STATUS = STATUS;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

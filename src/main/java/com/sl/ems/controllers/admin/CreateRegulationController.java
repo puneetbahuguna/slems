@@ -18,6 +18,13 @@ import java.math.BigInteger;
 @Controller
 public class CreateRegulationController {
 
+ /**
+   Author: Puneet Kumar Bahuguna
+   Year: DEC 2020
+   Project: SimplyLearn EMS
+   Description: This controller class handles the functionality of adding  a regulation by admin.
+ **/
+
     @Autowired
     private RegulationService addRegulationService;
 
@@ -27,6 +34,7 @@ public class CreateRegulationController {
     @Autowired
     private DepartmentService departmentService;
 
+    /** Following method loads the create regulation page.**/
     @RequestMapping("addregulation")
     public String addRegulationPage(Model model){
         if(sessionComponent.isAdminSession()){
@@ -36,6 +44,8 @@ public class CreateRegulationController {
             return "createregulation";
         }else return "redirect:relogin";
     }
+
+    /** Following method create the regulation by admin in the database**/
     @RequestMapping(value = "createregulation",method = RequestMethod.POST)
     public String addRegulation(@RequestParam("rltype") String rltype, @RequestParam("rldetails") String rldetails,
                               @RequestParam("deptid") String deptid,@RequestParam("cdate") String cdate,Model model){

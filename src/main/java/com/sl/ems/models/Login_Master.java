@@ -7,6 +7,12 @@ import java.math.BigInteger;
 
 @Entity(name = "login_master")
 public class Login_Master {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This Entity class mapped to the login_master table in the database.
+     **/
     @Id
     private BigInteger USERID;
     private String PASSWORD;

@@ -1,14 +1,17 @@
 package com.sl.ems.models;
 
-import com.sl.ems.utils.Utils;
-
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
 public class Employees {
-
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This Entity class mapped to the employees table in the database.
+     **/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger EMPID;
@@ -17,6 +20,11 @@ public class Employees {
     private Date DOB;
     private String EMAIL;
     private BigInteger DEPARTMENT_ID;
+
+    @OneToOne
+    @JoinTable(name = "Department")
+    @JoinColumn(name = "DEPARTMENT_ID")
+    private Department department;
 
     public Employees(){
     }
@@ -74,5 +82,13 @@ public class Employees {
 
     public void setDEPARTMENT_ID(BigInteger DEPARTMENT_ID) {
         this.DEPARTMENT_ID = DEPARTMENT_ID;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

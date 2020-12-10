@@ -9,6 +9,12 @@ import java.util.List;
 
 @Service
 public class DepartmentService {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This service class handles add department functionality.
+     **/
     @Autowired
     private DepartmentRepository departmentRepository;
 
@@ -16,6 +22,7 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
+    /** This method adds new department in the department table**/
     public boolean addDepartment(Department addDept){
         try {
             departmentRepository.save(addDept);

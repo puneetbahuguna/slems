@@ -121,22 +121,21 @@ response.setDateHeader ("Expires", 0);
             <th>${regulation.RLTYPE}</th>
             <th>${regulation.DETAILS}</th>
             <th>${cdate}</th>
-            <th>${deptName}</th>
+            <th>${regulation.department.DEPARTMENT_NM}</th>
             </tr>
             </table>
             </div>
             <div class="row">
             <table><tr>
             <th>All User Comments</th></tr>
-            <c:forEach items="${commentMsgs}" var="comment" varStatus="loop">
-            <tr><th>${comment[0]} - By ${comment[2]} ${comment[3]} on ${fn:split(comment[1], ' ')[0]}</th></tr>
+            <c:forEach items="${commentMsgs}" var="comment">
+            <tr><th>${comment.COMMENTS} - By ${comment.EMPID} on ${fn:split(comment.CREATEDDATE, ' ')[0]}</th></tr>
                                    </c:forEach>
             </table>
             </div>
 
             <form action="/updateregstatus" method="post">
             <input type="hidden" name="complianceId" value="${regulation.COMPLIANCEID}">
-            <input type="hidden" name="deptName" value="${deptName}">
 
             <c:choose>
                 <c:when test="${successmsg=='This Regulation is closed'}">

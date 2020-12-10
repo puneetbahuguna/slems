@@ -11,6 +11,12 @@ import java.math.BigInteger;
 
 @Service
 public class CloseRegulationService {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This service class handles closed regulation functionality.
+     **/
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
@@ -18,6 +24,8 @@ public class CloseRegulationService {
     @Autowired
     private RegulationRepo regulationRepo;
 
+    /** This method closed the regulation from open in compliance table. either all employee submitted
+     * their comments or admin have closed it**/
     public boolean closeRegulation(BigInteger departmentId,BigInteger complianceId){
         try{
                 int empCountInDept = employeeRepository.getEmpCountInDept(departmentId);

@@ -19,7 +19,7 @@ import java.math.BigInteger;
  Author: Puneet Kumar Bahuguna
  Year: DEC 2020
  Project: SimplyLearn EMS
- Description: This controller class handles the functionality of adding a department by admin.
+ Description: This controller class handles the functionality of adding  Employee by admin.
  **/
 @Controller
 public class AddEmployeeController {
@@ -33,6 +33,7 @@ public class AddEmployeeController {
     @Autowired
     private SessionComponent sessionComponent;
 
+    /** Following method loads the add employee page.**/
     @RequestMapping("addemp")
     public String addEmpPage(Model model){
         if(sessionComponent.isAdminSession()){
@@ -41,6 +42,10 @@ public class AddEmployeeController {
             return "addemployee";
         }else return "redirect:relogin";
     }
+
+    /** Following method create the employee record in the database.
+     * One entry in employee table and one is in login_master table.
+     * **/
     @RequestMapping(value = "addempform",method = RequestMethod.POST)
     public String addEmployee(@RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname,@RequestParam("dob") String dob,

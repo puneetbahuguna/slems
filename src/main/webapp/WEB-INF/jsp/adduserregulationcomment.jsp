@@ -120,14 +120,14 @@ response.setDateHeader ("Expires", 0);
             <th>${regulation.RLTYPE}</th>
             <th>${regulation.DETAILS}</th>
             <th>${regulation.CREATEDDATE}</th>
-            <th>${regulation.DEPARTMENT_ID}</th>
+            <th>${regulation.department.DEPARTMENT_NM}</th>
             </tr>
             </table>
             </div>
             <div class="row">
             <table><tr>
             <th>Your Comment</th></tr>
-            <tr><th>${commentMsg}</th></tr></table>
+            <tr><th>${commentMsg} ${comdate}</th></tr></table>
             </div>
             <form action="/updateusercomment" method="post">
             <input type="hidden" name="complianceId" value="${regulation.COMPLIANCEID}">

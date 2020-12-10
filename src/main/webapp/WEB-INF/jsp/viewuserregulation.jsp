@@ -112,7 +112,7 @@ response.setDateHeader ("Expires", 0);
             	<th>RL Type</th>
                   <th>Description</th>
                   <th>Creation Date</th>
-                  <th>Department Name</th>
+                  <th>Department</th>
                   <th>Select Action</th>
                   </tr>
              <c:forEach items="${reglist}" var="regulation">
@@ -121,7 +121,7 @@ response.setDateHeader ("Expires", 0);
              <th>${regulation.RLTYPE}</th>
              <th>${regulation.DETAILS}</th>
              <th>${regulation.CREATEDDATE}</th>
-             <th>${regulation.DEPARTMENT_ID}</th>
+             <th>${regulation.department.DEPARTMENT_NM}</th>
              <th>&nbsp;&nbsp;<a href="adduserregulation?regulationId=${regulation.COMPLIANCEID}">View</a></th>
              </tr>
              </c:forEach>

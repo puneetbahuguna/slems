@@ -6,6 +6,12 @@ import java.math.BigInteger;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class LoginUser {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This dto class gets the login result from the database.
+     **/
     private BigInteger USERID;
     private String ROLE;
     private String FIRSTNAME;

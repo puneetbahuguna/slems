@@ -8,14 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.List;
-
+/**
+ Author: Puneet Kumar Bahuguna
+ Year: DEC 2020
+ Project: SimplyLearn EMS
+ Description: This Repository interface handles loading of compliances data from the database.
+ **/
 public interface RegulationRepo extends JpaRepository<Compliance, BigInteger> {
 
     @Query(value = "select * from compliance WHERE DEPARTMENT_ID=?1 AND STATUS=?2 order by COMPLIANCEID DESC",nativeQuery = true)
     List<Compliance> getAllUserRegulations(BigInteger deptID,String status);
 
-    /*@Query(value = "select * from compliance order by COMPLIANCEID DESC",nativeQuery = true)
-    List<Compliance> getAllAdminRegulations();*/
+    @Query(value = "select * from compliance order by COMPLIANCEID DESC",nativeQuery = true)
+    List<Compliance> getAllAdminRegulations();
 
     @Query(value = "select * from compliance WHERE COMPLIANCEID=?1",nativeQuery = true)
     Compliance getRegulationById(BigInteger regulationId);

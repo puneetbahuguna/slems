@@ -10,10 +10,18 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class EmpDashboardController {
 
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This controller class handles loading of employee dashboard.
+     **/
+
     @Autowired
     private SessionComponent sessionComponent;
 
-        @RequestMapping("employee")
+    /** Following method loads the employee dashboard page.**/
+    @RequestMapping("employee")
         public String getEmpDashboard(HttpSession session, Model model){
             if(sessionComponent.isEmpSession()){
                 sessionComponent.getSessionModel(model);

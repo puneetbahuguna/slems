@@ -8,12 +8,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EditEmployeeService {
-
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This service class handles edit employee functionality.
+     **/
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
     private LoginService loginService;
 
+    /**This method updates the employee information in the employees table as well as in the
+     * login_master table**/
     public boolean editEmployee(Employees empData, Login_Master login_master){
         try {
             employeeRepository.editEmployeeDetails(empData.getFIRSTNAME(), empData.getLASTNAME(), empData.getDOB(),

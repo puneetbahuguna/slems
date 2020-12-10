@@ -9,6 +9,13 @@ import java.math.BigInteger;
 
 @Component
 public class SessionComponent {
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This component class handles the session of the application,
+     check for admin/emp session if exists, sets the common model of logged in user data.
+     **/
     @Autowired
     private HttpSession httpSession;
 

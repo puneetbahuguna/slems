@@ -1,6 +1,5 @@
 package com.sl.ems.controllers.admin;
 
-import com.sl.ems.models.EmpDeptJoin;
 import com.sl.ems.models.Employees;
 import com.sl.ems.models.Login_Master;
 import com.sl.ems.services.*;
@@ -14,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigInteger;
-import java.util.List;
 
 @Controller
 public class ViewEmployeeController {
+
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This controller class handles the View Employee functionality.
+     **/
 
     @Autowired
     private EmployeeService employeeService;
@@ -32,16 +37,17 @@ public class ViewEmployeeController {
     @Autowired
     private EditEmployeeService editEmployeeService;
 
+    /** This method loads the View employee page.**/
     @RequestMapping("viewemployee")
     public String addViewEmpPage(Model model){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
-            List<EmpDeptJoin> list = employeeService.getEmployeeWithDeptNameList();
-            model.addAttribute("emplist",employeeService.getEmployeeWithDeptNameList());
+            model.addAttribute("emplist",employeeService.getEmployeeList());
             return "viewemployee";
         }else return "redirect:relogin";
     }
 
+    /** Following method delete the employee by admin.**/
     @RequestMapping("deleteEmployee")
     public String deleteEmployee(Model model, @RequestParam("empId") String empId) {
         if (sessionComponent.isAdminSession() && deleteEmployeeService.deleteEmployee(new BigInteger(empId))) {
@@ -49,6 +55,7 @@ public class ViewEmployeeController {
         } else return "redirect:relogin";
     }
 
+    /** Following method load the edit employee page.**/
     @RequestMapping("editEmployee")
     public String addEditEmpPage(Model model,@RequestParam("empId") String empId){
         if(sessionComponent.isAdminSession()){
@@ -56,12 +63,13 @@ public class ViewEmployeeController {
             Employees emp= employeeService.getEmpById(new BigInteger(empId));
             model.addAttribute("userpwd",Utils.getBase64Decoding(loginService.findEmpPWDById(new BigInteger(empId))));
             model.addAttribute("dob",Utils.getFormattedDateString(emp.getDOB()));
-            model.addAttribute("employee",employeeService.getEmpById(new BigInteger(empId)));
+            model.addAttribute("employee",emp);
             model.addAttribute("deptlist",departmentService.getDepartmentList());
             return "editemployee";
         }else return "redirect:relogin";
     }
 
+    /** Following method updates the employee information from edit employee page.**/
     @RequestMapping(value = "editempform",method = RequestMethod.POST)
     public String editEmployeeForm(Model model,@RequestParam("firstname") String firstname,
                                    @RequestParam("lastname") String lastname,@RequestParam("dob") String dob,

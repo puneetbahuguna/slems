@@ -12,11 +12,19 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ViewDepartmentController {
 
+    /**
+     Author: Puneet Kumar Bahuguna
+     Year: DEC 2020
+     Project: SimplyLearn EMS
+     Description: This controller class handles the View Department functionality.
+     **/
+
     @Autowired
     private DepartmentService departmentService;
     @Autowired
     private SessionComponent sessionComponent;
 
+    /** Following method loads the view departments page.**/
     @RequestMapping("viewdepartment")
     public String addViewDeptPage(HttpSession session, Model model){
         if(sessionComponent.isAdminSession()){
