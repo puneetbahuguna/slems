@@ -49,6 +49,8 @@ public class LoginController {
         session.removeAttribute("userid");
         session.removeAttribute("name");
         session.removeAttribute("role");
+        session.removeAttribute("deptid");
+        session.removeAttribute("deptname");
         session.invalidate();
         model.addAttribute("message","Welcome to EMS");
         return "redirect:"+getLoginPage(session,model);
@@ -77,6 +79,7 @@ public class LoginController {
             session.setAttribute("name",userInfo.getFIRSTNAME()+" "+userInfo.getLASTNAME());
             session.setAttribute("role",userInfo.getROLE());
             session.setAttribute("deptid",userInfo.getDEPARTMENT_ID());
+            session.setAttribute("deptname",userInfo.getDEPARTMENT_NM());
             session.setMaxInactiveInterval(2*60*60);
               if(userInfo.getROLE().equals(UtilConstants.ADMIN_ROLE)){
                   return "redirect:admin";

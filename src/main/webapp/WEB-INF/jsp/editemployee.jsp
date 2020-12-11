@@ -126,7 +126,7 @@ response.setDateHeader ("Expires", 0);
       <select name="deptid">
      <c:forEach items="${deptlist}" var="dept">
       <c:choose>
-                                 <c:when test="${dept.DEPARTMENT_ID==employee.DEPARTMENT_ID}">
+                                 <c:when test="${dept.DEPARTMENT_ID==employee.department.DEPARTMENT_ID}">
                                   <option value="${dept.DEPARTMENT_ID}" selected>${dept.DEPARTMENT_NM}</option>
                                  </c:when>
                                  <c:otherwise>

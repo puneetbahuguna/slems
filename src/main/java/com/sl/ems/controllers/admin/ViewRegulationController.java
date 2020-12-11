@@ -51,7 +51,6 @@ public class ViewRegulationController {
             Compliance compliance = regulationService.getRegulationById(new BigInteger(complianceId));
             model.addAttribute("regulation",compliance);
             model.addAttribute("cdate", Utils.getFormattedDateString(compliance.getCREATEDDATE()));
-            List<StatusReport> replist = statusReportService.getAllUserComments(new BigInteger(complianceId));
             model.addAttribute("commentMsgs", statusReportService.
                     getAllUserComments(new BigInteger(complianceId)));
             if(compliance.getSTATUS().equals(UtilConstants.CLOSED_REGULATION_STATUS)) {

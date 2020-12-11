@@ -24,6 +24,11 @@ public interface StatusReportRepo extends JpaRepository<StatusReport, BigInteger
 
     @Transactional
     @Modifying
+    @Query(value = "delete from statusreport where EMPID=?1",nativeQuery = true)
+    void deleteEmployeeComments(BigInteger empId);
+
+    @Transactional
+    @Modifying
     @Query(value = "update statusreport set COMMENTS=?1 WHERE COMPLIANCEID=?2 AND EMPID=?3",nativeQuery = true)
     void updateUserComments(String comments,BigInteger complianceId,BigInteger empId);
 

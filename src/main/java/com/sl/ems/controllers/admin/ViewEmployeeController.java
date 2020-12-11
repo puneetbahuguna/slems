@@ -1,5 +1,6 @@
 package com.sl.ems.controllers.admin;
 
+import com.sl.ems.models.Department;
 import com.sl.ems.models.Employees;
 import com.sl.ems.models.Login_Master;
 import com.sl.ems.services.*;
@@ -76,7 +77,9 @@ public class ViewEmployeeController {
                                    @RequestParam("email") String email, @RequestParam("deptid") String deptid,
                                    @RequestParam("setpassword") String setpassword,@RequestParam("empid") String empid){
         Login_Master login_master = new Login_Master(new BigInteger(empid),setpassword);
-        Employees employeesData = new Employees(firstname,lastname, Utils.getFormattedDate(dob),email,new BigInteger(deptid));
+        Employees employeesData = new Employees(firstname,lastname, Utils.getFormattedDate(dob),email,
+                new Department(new BigInteger(deptid)));
+        employeesData.setDEPARTMENT_ID(employeesData.getDepartment().getDEPARTMENT_ID());
         employeesData.setEMPID(new BigInteger(empid));
         login_master.setPassword(Utils.getBase64Encoding(setpassword));
         if(sessionComponent.isAdminSession() && editEmployeeService.editEmployee(employeesData,login_master)){

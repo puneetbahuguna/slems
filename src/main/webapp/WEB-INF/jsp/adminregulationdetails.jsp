@@ -129,7 +129,7 @@ response.setDateHeader ("Expires", 0);
             <table><tr>
             <th>All User Comments</th></tr>
             <c:forEach items="${commentMsgs}" var="comment">
-            <tr><th>${comment.COMMENTS} - By ${comment.EMPID} on ${fn:split(comment.CREATEDDATE, ' ')[0]}</th></tr>
+            <tr><th>${comment.COMMENTS} - By ${comment.employee.FIRSTNAME} ${comment.employee.LASTNAME} on ${fn:split(comment.CREATEDDATE, ' ')[0]}</th></tr>
                                    </c:forEach>
             </table>
             </div>

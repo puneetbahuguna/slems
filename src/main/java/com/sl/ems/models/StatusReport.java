@@ -3,7 +3,6 @@ package com.sl.ems.models;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name="statusreport")
@@ -18,15 +17,16 @@ public class StatusReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger STATUSRPTID;
-    private BigInteger EMPID;
     private String COMMENTS;
     private Date CREATEDDATE;
     private BigInteger DEPARTMENT_ID;
 
-   /* @OneToOne
-    @JoinTable(name = "Employees")
+    @Transient
+    private BigInteger EMPID;
+
+    @OneToOne
     @JoinColumn(name = "EMPID")
-    private Employees employee;*/
+    private Employees employee;
 
 
     public StatusReport(){
@@ -34,13 +34,13 @@ public class StatusReport {
     public StatusReport(String COMMENTS,Date CREATEDDATE){
 
     }
-    public StatusReport(BigInteger COMPLIANCEID,BigInteger EMPID,
-                        String COMMENTS,Date CREATEDDATE,BigInteger DEPARTMENT_ID){
+    public StatusReport(BigInteger COMPLIANCEID,String COMMENTS,Date CREATEDDATE,
+                        BigInteger DEPARTMENT_ID,Employees employee){
         this.COMPLIANCEID=COMPLIANCEID;
-        this.EMPID=EMPID;
         this.COMMENTS=COMMENTS;
         this.CREATEDDATE=CREATEDDATE;
         this.DEPARTMENT_ID=DEPARTMENT_ID;
+        this.employee=employee;
     }
     public BigInteger getCOMPLIANCEID() {
         return COMPLIANCEID;
@@ -50,20 +50,19 @@ public class StatusReport {
         this.COMPLIANCEID = COMPLIANCEID;
     }
 
+    public void setEMPID(BigInteger EMPID) {
+        this.EMPID = EMPID;
+    }
+
+    public BigInteger getEMPID() {
+        return EMPID;
+    }
     public BigInteger getSTATUSRPTID() {
         return STATUSRPTID;
     }
 
     public void setSTATUSRPTID(BigInteger STATUSRPTID) {
         this.STATUSRPTID = STATUSRPTID;
-    }
-
-    public BigInteger getEMPID() {
-        return EMPID;
-    }
-
-    public void setEMPID(BigInteger EMPID) {
-        this.EMPID = EMPID;
     }
 
     public String getCOMMENTS() {
@@ -90,11 +89,11 @@ public class StatusReport {
         this.DEPARTMENT_ID = DEPARTMENT_ID;
     }
 
-    /*public Employees getEmployee() {
+    public Employees getEmployee() {
         return employee;
     }
 
     public void setEmployee(Employees employee) {
         this.employee = employee;
-    }*/
+    }
 }

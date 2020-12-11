@@ -32,7 +32,8 @@ public class LoginService {
         if(data!=null){
            Employees emp = employeeRepository.findEmployeeDetails(data.getUSERID());
            userObj=new LoginUser(data.getUSERID(),data.getROLE(),emp.getFIRSTNAME(),
-                   emp.getLASTNAME(),emp.getDEPARTMENT_ID());
+                   emp.getLASTNAME(),emp.getDepartment().getDEPARTMENT_ID(),emp.getDepartment().getDEPARTMENT_NM());
+
         }else{
             userObj=new LoginUser();
             userObj.setValidCredentials(false);

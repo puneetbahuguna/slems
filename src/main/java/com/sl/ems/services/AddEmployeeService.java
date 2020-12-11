@@ -24,7 +24,7 @@ public class AddEmployeeService {
     /** This method add the employee record in employees and login_master table.**/
     public boolean addEmployee(Login_Master loginData, Employees empData){
         try {
-            Employees insertedEmp = employeeRepository.save(empData);
+            Employees insertedEmp=employeeRepository.save(empData);
             loginData.setUSERID(insertedEmp.getEMPID());
             loginRepository.save(loginData);
             return true;

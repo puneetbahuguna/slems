@@ -19,21 +19,24 @@ public class Employees {
     private String LASTNAME;
     private Date DOB;
     private String EMAIL;
+    @Transient
     private BigInteger DEPARTMENT_ID;
 
     @OneToOne
-    @JoinTable(name = "Department")
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 
     public Employees(){
     }
-    public Employees(String FIRSTNAME,String LASTNAME,Date DOB,String EMAIL,BigInteger DEPARTMENT_ID){
+    public Employees(BigInteger EMPID){
+        this.EMPID=EMPID;
+    }
+    public Employees(String FIRSTNAME,String LASTNAME,Date DOB,String EMAIL,Department department){
         this.FIRSTNAME=FIRSTNAME;
         this.LASTNAME=LASTNAME;
         this.DOB=DOB;
         this.EMAIL=EMAIL;
-        this.DEPARTMENT_ID=DEPARTMENT_ID;
+        this.department=department;
     }
 
     public BigInteger getEMPID() {
@@ -76,19 +79,19 @@ public class Employees {
         this.EMAIL = EMAIL;
     }
 
-    public BigInteger getDEPARTMENT_ID() {
-        return DEPARTMENT_ID;
-    }
-
-    public void setDEPARTMENT_ID(BigInteger DEPARTMENT_ID) {
-        this.DEPARTMENT_ID = DEPARTMENT_ID;
-    }
-
     public Department getDepartment() {
         return department;
     }
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public void setDEPARTMENT_ID(BigInteger DEPARTMENT_ID) {
+        this.DEPARTMENT_ID = DEPARTMENT_ID;
+    }
+
+    public BigInteger getDEPARTMENT_ID() {
+        return DEPARTMENT_ID;
     }
 }

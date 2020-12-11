@@ -18,10 +18,13 @@ public class DeleteEmployeeService {
     private EmployeeRepository employeeRepository;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private StatusReportService statusReportService;
 
     /**This method deletes the employee record from both employees and login_master table. **/
     public boolean deleteEmployee(BigInteger id){
         try {
+            statusReportService.deleteEmployeeComments(id);
             employeeRepository.deleteEmployee(id);
             loginService.deleteUser(id);
             return true;

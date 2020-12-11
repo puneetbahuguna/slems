@@ -23,12 +23,13 @@ public class LoginUser {
     public LoginUser(){
     }
     public LoginUser(BigInteger USERID,String ROLE,String FIRSTNAME,String LASTNAME,
-                     BigInteger DEPARTMENT_ID){
+                     BigInteger DEPARTMENT_ID,String DEPARTMENT_NM){
         this.USERID=USERID;
         this.ROLE=ROLE;
         this.FIRSTNAME=FIRSTNAME;
         this.LASTNAME=LASTNAME;
         this.DEPARTMENT_ID=DEPARTMENT_ID;
+        this.DEPARTMENT_NM=DEPARTMENT_NM;
     }
 
     public BigInteger getUSERID() {

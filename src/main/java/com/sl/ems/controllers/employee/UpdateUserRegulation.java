@@ -1,5 +1,6 @@
 package com.sl.ems.controllers.employee;
 
+import com.sl.ems.models.Employees;
 import com.sl.ems.models.StatusReport;
 import com.sl.ems.services.CloseRegulationService;
 import com.sl.ems.services.RegulationService;
@@ -62,9 +63,10 @@ public class UpdateUserRegulation {
     public String updateUserComment(@RequestParam("usercomment") String userComment,
                                  @RequestParam("actionFlag") String actionFlag,
                                  @RequestParam("complianceId") String complianceId, Model model){
-        if(sessionComponent.isEmpSession() && statusReportService.addOrUpdateUserComment
-                (new StatusReport(new BigInteger(complianceId),sessionComponent.getSessionUserId(),
-                        userComment, Utils.getCurrentDate(),sessionComponent.getSessionUserDeptId()),getActionFlag(actionFlag))){
+        StatusReport statusData = new StatusReport(new BigInteger(complianceId),userComment, Utils.getCurrentDate(),
+                sessionComponent.getSessionUserDeptId(),new Employees(sessionComponent.getSessionUserId()));
+        statusData.setEMPID(statusData.getEmployee().getEMPID());
+        if(sessionComponent.isEmpSession() && statusReportService.addOrUpdateUserComment(statusData,getActionFlag(actionFlag))){
             closeRegulationService.closeRegulation(sessionComponent.getSessionUserDeptId(),
                     new BigInteger(complianceId));
         }

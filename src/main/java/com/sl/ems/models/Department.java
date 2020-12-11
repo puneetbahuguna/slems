@@ -21,6 +21,9 @@ public class Department {
     public Department(String DEPARTMENT_NM){
         this.DEPARTMENT_NM=DEPARTMENT_NM;
     }
+    public Department(BigInteger DEPARTMENT_ID){
+        this.DEPARTMENT_ID=DEPARTMENT_ID;
+    }
     public BigInteger getDEPARTMENT_ID() {
         return DEPARTMENT_ID;
     }

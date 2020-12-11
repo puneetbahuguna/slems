@@ -23,6 +23,7 @@ public class SessionComponent {
         model.addAttribute("fullname",httpSession.getAttribute("name"));
         model.addAttribute("empid",httpSession.getAttribute("userid"));
         model.addAttribute("userrole",httpSession.getAttribute("role"));
+        model.addAttribute("deptname",httpSession.getAttribute("deptname"));
         return model;
     }
 

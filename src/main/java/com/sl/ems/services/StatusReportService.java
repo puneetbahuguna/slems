@@ -25,6 +25,16 @@ public class StatusReportService {
        return statusReportRepo.getUserCommentonCompliance(complianceId,empId);
     }
 
+    /**This method deletes all the comments of an employee from the status report table.**/
+    public boolean deleteEmployeeComments(BigInteger empId){
+        try {
+            statusReportRepo.deleteEmployeeComments(empId);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     /**This method gets the list of all users comment on a compliance, visible to admin only.**/
     public List<StatusReport> getAllUserComments(BigInteger complianceId){
         return statusReportRepo.getAllUserComments(complianceId);

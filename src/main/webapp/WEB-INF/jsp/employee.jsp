@@ -96,6 +96,7 @@ response.setDateHeader ("Expires", 0);
        <p><b>Hi ${fullname}</b></p>
        <p><b>Emp ID:${empid}</b></p>
        <p><b>Role:${userrole}</b></p>
+       <p><b>Department:${deptname}</b></p>
     </div>
   </div>
 </div>
