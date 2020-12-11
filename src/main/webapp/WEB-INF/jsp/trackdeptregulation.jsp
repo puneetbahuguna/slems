@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
   <title>Welcome to EMS</title>
@@ -118,7 +119,7 @@ response.setDateHeader ("Expires", 0);
              <tr>
              <th>${regulation.RLTYPE}</th>
              <th>${regulation.DETAILS}</th>
-             <th>${regulation.CREATEDDATE}</th>
+             <th>${fn:split(regulation.CREATEDDATE, ' ')[0]}</th>
              <th>${regulation.department.DEPARTMENT_NM}</th>
              <th>${regulation.STATUS}</th>
              <th>&nbsp;&nbsp;<a href="adduserregulation?regulationId=${regulation.COMPLIANCEID}">View</a></th>
