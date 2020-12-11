@@ -18,3 +18,11 @@
 #User can check compliance status of department as well as can check the status of previous compliance with their comments.
 
 #As soon as all the employees submitted their comments on a compliance it will automatically gets closed. 
+
+#How to run the application.
+#1.Import the project in inteeliJ.
+#2.Run the script of database dump given in the project named slems.sql
+#3.Login to the app by admin. Userid -1000 and PWD - admin.
+#4.Start Using it, add employee, regulations and department.
+
+#Thank you.
