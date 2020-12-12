@@ -25,6 +25,17 @@
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
 }
+.loginbox {
+    min-height: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #b7339d;
+    border: 1px solid #e3e3e3;
+    color: white;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 555px;}
@@ -122,10 +133,11 @@ response.setDateHeader ("Expires", 0);
 	   </form>
     </div>
     <div class="col-sm-2 sidenav">
+    <div class="loginbox">
     <p><b>Hi ${fullname}</b></p>
     <p><b>Emp ID:${empid}</b></p>
     <p><b>Role:${userrole}</b></p>
-
+    </div>
     </div>
   </div>
 </div>

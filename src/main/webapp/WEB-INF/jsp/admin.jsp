@@ -15,12 +15,27 @@
       margin-bottom: 0;
       border-radius: 0;
     }
+       a:link { color: white; }
+        a:visited { color: white; }
+        a:hover { color: white; }
+        a:active { color: white; }
 	.well {
     min-height: 20px;
     padding: 19px;
     margin-bottom: 20px;
     background-color: #d9edf7;
     border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+.loginbox {
+    min-height: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #b7339d;
+    border: 1px solid #e3e3e3;
+    color: white;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
@@ -81,18 +96,18 @@ response.setDateHeader ("Expires", 0);
       <h2>Welcome to Admin Dashboard</h2>
       <div class="row gap">
      <div class="col-sm-4">
-    <div class="well">
+    <div class="well" style="background-color:#7b42a9;">
         <p><a href="addemp">Add Employee</a></p>
       </div>
       </div>
        <div class="col-sm-4">
-       <div class="well">
+       <div class="well" style="background-color:#42a9a7;">
         <p><a href="viewemployee">View Employee</a></p>
         </div>
       </div>
 
 	   <div class="col-sm-4">
-       <div class="well">
+       <div class="well" style="background-color:#a94242;">
         <p><a href="adddept">Add Department</a></p>
         </div>
       </div>
@@ -101,18 +116,18 @@ response.setDateHeader ("Expires", 0);
 
       <div class="row">
      <div class="col-sm-4">
-    <div class="well">
+    <div class="well" style="background-color:#31708f;">
         <p><a href="viewdepartment">View Department</a></p>
       </div>
       </div>
        <div class="col-sm-4">
-       <div class="well">
+       <div class="well" style="background-color:#718f31;">
         <p><a href="addregulation">Create Regulation</a></p>
         </div>
       </div>
 
 	   <div class="col-sm-4">
-       <div class="well">
+       <div class="well" style="background-color:#d8550f;">
         <p><a href="viewregulation">View Regulation</a></p>
         </div>
       </div>
@@ -120,10 +135,11 @@ response.setDateHeader ("Expires", 0);
       </div>
     </div>
     <div class="col-sm-2 sidenav">
+    <div class="loginbox">
     <p><b>Hi ${fullname}</b></p>
     <p><b>Emp ID:${empid}</b></p>
     <p><b>Role:${userrole}</b></p>
-
+    </div>
     </div>
   </div>
 </div>

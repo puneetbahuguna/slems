@@ -15,6 +15,10 @@
       margin-bottom: 0;
       border-radius: 0;
     }
+    a:link { color: white; }
+    a:visited { color: white; }
+    a:hover { color: white; }
+    a:active { color: white; }
 	.well {
     min-height: 20px;
     padding: 60px;
@@ -25,7 +29,17 @@
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
 }
-
+.loginbox {
+    min-height: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #b7339d;
+    border: 1px solid #e3e3e3;
+    color: white;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 555px;}
 
@@ -80,12 +94,12 @@ response.setDateHeader ("Expires", 0);
       <h2>Welcome to Employee Dashboard</h2>
       <div class="row gap">
      <div class="col-sm-6">
-    <div class="well">
+    <div class="well" style="background-color:#d8550f;font-size:medium;">
         <p><a href="viewuserregulation">View Assigned Regulations</a></p>
       </div>
       </div>
        <div class="col-sm-6">
-       <div class="well">
+       <div class="well" style="background-color:#18929b;font-size:medium;">
         <p><a href="trackdeptregulations">Track Department Compliance</a></p>
         </div>
       </div>
@@ -93,10 +107,12 @@ response.setDateHeader ("Expires", 0);
       </div>
     </div>
     <div class="col-sm-2 sidenav">
+    <div class="loginbox">
        <p><b>Hi ${fullname}</b></p>
        <p><b>Emp ID:${empid}</b></p>
        <p><b>Role:${userrole}</b></p>
        <p><b>Department:${deptname}</b></p>
+       </div>
     </div>
   </div>
 </div>
