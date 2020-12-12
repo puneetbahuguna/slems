@@ -36,7 +36,7 @@ public class CreateRegulationController {
 
     /** Following method loads the create regulation page.**/
     @RequestMapping("addregulation")
-    public String addRegulationPage(Model model){
+    private String addRegulationPage(Model model){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
             //List<Department> dept =  departmentService.getDepartmentList();

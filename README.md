@@ -21,7 +21,7 @@
 
 #How to run the application.
 #1.Import the project in inteliJ.
-#2.Run the script of database dump given in the project named slems.sql
+#2.Run the script of database dump in mysql workbench given in the project named slems.sql
 #3.Run the project and in browser open it like localhost://8092/
 #4.Login to the app by admin. Userid -1000 and PWD - admin.
 #5.Start Using it, add employee, regulations and department.

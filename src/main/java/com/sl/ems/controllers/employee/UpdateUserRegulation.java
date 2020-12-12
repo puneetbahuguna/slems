@@ -38,7 +38,7 @@ public class UpdateUserRegulation {
 
     /** Following method loads the regulation details page along with user's own comment.**/
     @RequestMapping("adduserregulation")
-    public String addUserRegulation(Model model,@RequestParam("regulationId") String complianceId){
+    private String addUserRegulation(Model model,@RequestParam("regulationId") String complianceId){
         if(sessionComponent.isEmpSession()){
             model.addAttribute("regulation",regulationService.getRegulationById(new BigInteger(complianceId)));
             StatusReport ss = statusReportService.getUserCommentonCompliance

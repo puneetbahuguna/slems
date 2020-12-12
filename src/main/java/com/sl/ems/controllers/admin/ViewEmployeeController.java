@@ -40,7 +40,7 @@ public class ViewEmployeeController {
 
     /** This method loads the View employee page.**/
     @RequestMapping("viewemployee")
-    public String addViewEmpPage(Model model){
+    private String addViewEmpPage(Model model){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
             model.addAttribute("emplist",employeeService.getEmployeeList());
@@ -58,7 +58,7 @@ public class ViewEmployeeController {
 
     /** Following method load the edit employee page.**/
     @RequestMapping("editEmployee")
-    public String addEditEmpPage(Model model,@RequestParam("empId") String empId){
+    private String addEditEmpPage(Model model,@RequestParam("empId") String empId){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
             Employees emp= employeeService.getEmpById(new BigInteger(empId));

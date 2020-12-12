@@ -46,7 +46,7 @@ public class ViewRegulationController {
 
     /** Following method loads the admin regulation details page.**/
     @RequestMapping("adminregulationdetails")
-    public String addAdminRegDetails(Model model,@RequestParam("regulationId") String complianceId){
+    private String addAdminRegDetails(Model model,@RequestParam("regulationId") String complianceId){
         if(sessionComponent.isAdminSession()){
             Compliance compliance = regulationService.getRegulationById(new BigInteger(complianceId));
             model.addAttribute("regulation",compliance);
@@ -64,8 +64,8 @@ public class ViewRegulationController {
     /** Following method updates the regulation status to closed by admin.**/
     @RequestMapping(value = "updateregstatus",method = RequestMethod.POST)
     public String updateUserComment(@RequestParam("complianceId") String complianceId, Model model){
-        if(sessionComponent.isAdminSession() &&
-                regulationService.updateComplianceStatus(new BigInteger(complianceId))){
+        if(sessionComponent.isAdminSession()){
+            regulationService.updateComplianceStatus(new BigInteger(complianceId));
         }
         return addAdminRegDetails(model,complianceId);
     }

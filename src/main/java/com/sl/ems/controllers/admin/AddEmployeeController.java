@@ -36,7 +36,7 @@ public class AddEmployeeController {
 
     /** Following method loads the add employee page.**/
     @RequestMapping("addemp")
-    public String addEmpPage(Model model){
+    private String addEmpPage(Model model){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
             model.addAttribute("deptlist",departmentService.getDepartmentList());

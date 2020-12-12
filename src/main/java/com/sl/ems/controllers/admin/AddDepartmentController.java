@@ -27,7 +27,7 @@ public class AddDepartmentController {
 
     /** This method loads the initial add department page.**/
     @RequestMapping("adddept")
-    public String addDeptPage(Model model){
+    private String addDeptPage(Model model){
         if(sessionComponent.isAdminSession()){
             sessionComponent.getSessionModel(model);
             return "adddepartment";
