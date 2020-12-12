@@ -49,7 +49,7 @@ public class StatusReportService {
                 return true;
             } else {
                 statusReportRepo.updateUserComments(statusReport.getCOMMENTS(), statusReport.getCOMPLIANCEID(),
-                        statusReport.getEMPID());
+                        statusReport.getEmployee().getEMPID());
                 return true;
             }
         }catch (Exception e){

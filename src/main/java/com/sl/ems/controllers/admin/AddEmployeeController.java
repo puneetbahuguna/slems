@@ -55,7 +55,6 @@ public class AddEmployeeController {
         Login_Master login_master = new Login_Master();
         Employees employeesData = new Employees(firstname,lastname, Utils.getFormattedDate(dob),email,
                 new Department(new BigInteger(deptid)));
-        employeesData.setDEPARTMENT_ID(employeesData.getDepartment().getDEPARTMENT_ID());
         login_master.setPassword(Utils.getBase64Encoding(setpassword));
         login_master.setROLE("employee");
         if(sessionComponent.isAdminSession() && addEmployeeService.addEmployee(login_master,employeesData)){

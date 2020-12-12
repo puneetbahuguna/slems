@@ -21,9 +21,6 @@ public class StatusReport {
     private Date CREATEDDATE;
     private BigInteger DEPARTMENT_ID;
 
-    @Transient
-    private BigInteger EMPID;
-
     @OneToOne
     @JoinColumn(name = "EMPID")
     private Employees employee;
@@ -50,13 +47,6 @@ public class StatusReport {
         this.COMPLIANCEID = COMPLIANCEID;
     }
 
-    public void setEMPID(BigInteger EMPID) {
-        this.EMPID = EMPID;
-    }
-
-    public BigInteger getEMPID() {
-        return EMPID;
-    }
     public BigInteger getSTATUSRPTID() {
         return STATUSRPTID;
     }

@@ -19,8 +19,6 @@ public class Employees {
     private String LASTNAME;
     private Date DOB;
     private String EMAIL;
-    @Transient
-    private BigInteger DEPARTMENT_ID;
 
     @OneToOne
     @JoinColumn(name = "DEPARTMENT_ID")
@@ -85,13 +83,5 @@ public class Employees {
 
     public void setDepartment(Department department) {
         this.department = department;
-    }
-
-    public void setDEPARTMENT_ID(BigInteger DEPARTMENT_ID) {
-        this.DEPARTMENT_ID = DEPARTMENT_ID;
-    }
-
-    public BigInteger getDEPARTMENT_ID() {
-        return DEPARTMENT_ID;
     }
 }

@@ -65,7 +65,6 @@ public class UpdateUserRegulation {
                                  @RequestParam("complianceId") String complianceId, Model model){
         StatusReport statusData = new StatusReport(new BigInteger(complianceId),userComment, Utils.getCurrentDate(),
                 sessionComponent.getSessionUserDeptId(),new Employees(sessionComponent.getSessionUserId()));
-        statusData.setEMPID(statusData.getEmployee().getEMPID());
         if(sessionComponent.isEmpSession() && statusReportService.addOrUpdateUserComment(statusData,getActionFlag(actionFlag))){
             closeRegulationService.closeRegulation(sessionComponent.getSessionUserDeptId(),
                     new BigInteger(complianceId));

@@ -1,6 +1,7 @@
 package com.sl.ems.controllers.admin;
 
 import com.sl.ems.models.Compliance;
+import com.sl.ems.models.Department;
 import com.sl.ems.services.RegulationService;
 import com.sl.ems.services.DepartmentService;
 import com.sl.ems.utils.SessionComponent;
@@ -50,7 +51,8 @@ public class CreateRegulationController {
     public String addRegulation(@RequestParam("rltype") String rltype, @RequestParam("rldetails") String rldetails,
                               @RequestParam("deptid") String deptid,@RequestParam("cdate") String cdate,Model model){
         if(sessionComponent.isAdminSession() && addRegulationService.addRegulation(new Compliance
-                (rltype,rldetails, Utils.getFormattedDate(cdate),new BigInteger(deptid), UtilConstants.DEFAULT_REGULATION_STATUS))){
+                (rltype,rldetails, Utils.getFormattedDate(cdate), UtilConstants.DEFAULT_REGULATION_STATUS,
+                        new Department(new BigInteger(deptid))))){
             model.addAttribute("msg","Regulation is added Successfully!");
         } else model.addAttribute("msg","Some Error Occurred!");
         return addRegulationPage(model);

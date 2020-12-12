@@ -24,7 +24,7 @@ public class EditEmployeeService {
     public boolean editEmployee(Employees empData, Login_Master login_master){
         try {
             employeeRepository.editEmployeeDetails(empData.getFIRSTNAME(), empData.getLASTNAME(), empData.getDOB(),
-                    empData.getEMAIL(), empData.getDEPARTMENT_ID(), empData.getEMPID());
+                    empData.getEMAIL(), empData.getDepartment().getDEPARTMENT_ID(), empData.getEMPID());
             loginService.editLoginMaster(login_master);
             return true;
         }catch (Exception e){

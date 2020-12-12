@@ -18,22 +18,20 @@ public class Compliance {
     private String RLTYPE;
     private String DETAILS;
     private Date CREATEDDATE;
-    private BigInteger DEPARTMENT_ID;
     private String STATUS;
 
     @OneToOne
-    @JoinTable(name = "Department")
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 
     public Compliance(){
     }
-    public Compliance(String RLTYPE,String DETAILS,Date CREATEDDATE,BigInteger DEPARTMENT_ID,String STATUS){
+    public Compliance(String RLTYPE,String DETAILS,Date CREATEDDATE,String STATUS,Department department){
         this.RLTYPE=RLTYPE;
         this.DETAILS=DETAILS;
         this.CREATEDDATE=CREATEDDATE;
-        this.DEPARTMENT_ID=DEPARTMENT_ID;
         this.STATUS=STATUS;
+        this.department=department;
     }
     public BigInteger getCOMPLIANCEID() {
         return COMPLIANCEID;
@@ -65,14 +63,6 @@ public class Compliance {
 
     public void setCREATEDDATE(Date CREATEDDATE) {
         this.CREATEDDATE = CREATEDDATE;
-    }
-
-    public BigInteger getDEPARTMENT_ID() {
-        return DEPARTMENT_ID;
-    }
-
-    public void setDEPARTMENT_ID(BigInteger DEPARTMENT_ID) {
-        this.DEPARTMENT_ID = DEPARTMENT_ID;
     }
 
     public String getSTATUS() {
